@@ -1,0 +1,31 @@
+﻿@model IEnumerable<MailSender.Models.Domains.Recipient>
+
+
+<div class="text-center mb-5">
+    <h3>Lista odbiorców:</h3>
+</div>
+
+
+@if (Model != null && Model.Any())
+{
+    <ul>
+        @foreach (var recipient in Model)
+        {
+            <li class="d-flex justify-content-between mb-1">
+                @recipient.EmailAddress
+                <button type="button" class="btn btn-primary btn-sm m-lg-0" onclick="addRecipient('@recipient.EmailAddress')">+</button>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>Brak odbiorców</p>
+}
+
+<script>
+    function addRecipient(recipient) {
+        var recipientInput = document.getElementById('To');
+        recipientInput.value += recipient + ', ';
+    }
+</script>

@@ -1,0 +1,41 @@
+﻿@model IEnumerable<MailSender.Models.Domains.Email>
+@{
+    ViewBag.Title = "Wysłane";
+}
+
+<h1>Wysłane maile</h1>
+
+<button class="btn btn-primary mt-3 mb-3" onclick='window.location.href="@Url.Action("Index", "Home")"'>Wstecz</button>
+
+<div class="row border border-opacity-25 p-3">
+
+    @if (Model != null && Model.Any())
+    {
+        <table class="table table-hover table-striped mt-3 mb-5 ">
+            <thead>
+                <tr>
+                    <th scope="col">Do</th>
+                    <th scope="col">Temat</th>
+                    <th scope="col">Treść</th>
+                    <th scope="col">Data</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var email in Model)
+                {
+                    <tr>
+                        <td>@email.To</td>
+                        <td>@email.Subject</td>
+                        <td>@email.Body</td>
+                        <td>@email.SentTime</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    }
+    else
+    {
+        <p>Brak wysłanych e-maili.</p>
+    }
+</div>

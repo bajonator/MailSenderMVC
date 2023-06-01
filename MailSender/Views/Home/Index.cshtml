@@ -1,0 +1,97 @@
+﻿@model MailSender.Models.Domains.Email
+@{
+    ViewBag.Title = "Wiadomość";
+}
+
+@using (Html.BeginForm("SendEmail", "Home", FormMethod.Post))
+{
+    <div class="row justify-content-center">
+        <div class="col-lg-6 border border-opacity-75 p-3 mt-4">
+            <h1 class="mb-3 text-center">Wiadomość</h1>
+
+            @Html.AntiForgeryToken()
+
+            <div class="row">
+                @Html.LabelFor(m => m.From, new { @class = "col-md-2 col-form-label label-bold" })
+                @Html.TextBoxFor(m => m.From, new { @class = "form-control", @readonly = "readonly" })
+            </div>
+            <div class="row">
+                @Html.LabelFor(m => m.To, new { @class = "col-md-2 col-form-label label-bold" })
+                @Html.TextBoxFor(m => m.To, new { @class = "form-control", autofocus = "autocofus" })
+                @Html.ValidationMessageFor(m => m.To)
+                <small>Oddziel odbiorców przecinkiem</small>
+            </div>
+            <div class="row">
+                @Html.LabelFor(m => m.Subject, new { @class = "col-md-2 col-form-label label-bold" })
+                @Html.TextBoxFor(m => m.Subject, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Subject)
+            </div>
+            <div class="row">
+                @Html.LabelFor(m => m.Body, new { @class = "col-md-3 col-form-label label-bold" })
+                @Html.TextAreaFor(m => m.Body, new { @class = "form-control", rows = "3", style = "height: 260px" })
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12 mt-3 d-flex justify-content-between">
+                    <button class="btn btn-dark" onclick="btnSendEmail(this)">Wyślij</button>
+                    <button class="btn btn-primary btn-info" onclick='window.location.href="@Url.Action("HistoryEmails", "Home")"'>Wysłane e-maile</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-5 offset-lg-1 border border-opacity-25 p-3 mt-4" id="recipient">
+            @Html.Partial("_ListRecipients", Model.Recipient)
+        </div>
+    </div>
+}
+
+@section Scripts
+{
+    <script type="text/javascript">
+        function redirectToEmailParams() {
+            window.location.href = '@Url.Action("EmailParams", "Home")';
+        }
+
+        function btnSendEmail(btn) {
+            var emailData = {
+                From: btn.From.val(),
+                To: btn.To.val(),
+                Subject: btn.Subject.val(),
+                Body: btn.Body.val()
+            };
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Success", "Home")',
+                data: emailData,
+                success: function (data) {
+                    if (data.Success) {
+                        document.getElementById("To").value = "";
+                        document.getElementById("Subject").value = "";
+                        document.getElementById("Body").value = "";
+                        refreshRecipient();
+                        alert("E-mail został wysłany.");
+                    } else {
+                        alert(data.Message);
+                    }
+                },
+                error: function (data) {
+                    alert(data.Message);
+                },
+                dataType: 'json'
+            });
+        }
+
+        function refreshRecipient() {
+            $.ajax({
+                url: '@Url.Action("_ListRecipients")',
+                type: 'GET',
+                success: function (result) {
+                    $('#recipient').html(result);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+    </script>
+}
