@@ -167,17 +167,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202305282131409_init.cs" />
-    <Compile Include="Migrations\202305282131409_init.designer.cs">
-      <DependentUpon>202305282131409_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202305291733254_init1.cs" />
-    <Compile Include="Migrations\202305291733254_init1.designer.cs">
-      <DependentUpon>202305291733254_init1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202305301840164_init2.cs" />
-    <Compile Include="Migrations\202305301840164_init2.designer.cs">
-      <DependentUpon>202305301840164_init2.cs</DependentUpon>
+    <Compile Include="Migrations\202306021427226_init.cs" />
+    <Compile Include="Migrations\202306021427226_init.designer.cs">
+      <DependentUpon>202306021427226_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Domains\Email.cs" />
@@ -314,14 +306,8 @@
     <Content Include="Scripts\jquery-3.6.4.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202305282131409_init.resx">
-      <DependentUpon>202305282131409_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202305291733254_init1.resx">
-      <DependentUpon>202305291733254_init1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202305301840164_init2.resx">
-      <DependentUpon>202305301840164_init2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202306021427226_init.resx">
+      <DependentUpon>202306021427226_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

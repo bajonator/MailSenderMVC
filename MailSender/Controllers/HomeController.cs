@@ -117,7 +117,6 @@ namespace MailSender.Controllers
 
                 _sendEmailRepository.Add(email);
                 email.History = _sendEmailRepository.GetEmails(userId);
-
                 return Json(new { Success = true });
 
             }

@@ -2,9 +2,12 @@
 @{
     ViewBag.Title = "Wiadomość";
 }
-
-@using (Html.BeginForm("SendEmail", "Home", FormMethod.Post))
-{
+<div class="row">
+    <div class="col-lg-12 mt-3 d-flex justify-content-between">
+        <button class="btn btn-primary btn-info" onclick='window.location.href="@Url.Action("HistoryEmails", "Home")"'>Wysłane e-maile</button>
+    </div>
+</div>
+<form id="EmailForm">
     <div class="row justify-content-center">
         <div class="col-lg-6 border border-opacity-75 p-3 mt-4">
             <h1 class="mb-3 text-center">Wiadomość</h1>
@@ -33,8 +36,7 @@
 
             <div class="row">
                 <div class="col-lg-12 mt-3 d-flex justify-content-between">
-                    <button class="btn btn-dark" onclick="btnSendEmail(this)">Wyślij</button>
-                    <button class="btn btn-primary btn-info" onclick='window.location.href="@Url.Action("HistoryEmails", "Home")"'>Wysłane e-maile</button>
+                    <button class="btn btn-dark" type="submit">Wyślij</button>
                 </div>
             </div>
         </div>
@@ -43,7 +45,7 @@
             @Html.Partial("_ListRecipients", Model.Recipient)
         </div>
     </div>
-}
+</form>
 
 @section Scripts
 {
@@ -52,17 +54,11 @@
             window.location.href = '@Url.Action("EmailParams", "Home")';
         }
 
-        function btnSendEmail(btn) {
-            var emailData = {
-                From: btn.From.val(),
-                To: btn.To.val(),
-                Subject: btn.Subject.val(),
-                Body: btn.Body.val()
-            };
+$('#EmailForm').submit(function () {
             $.ajax({
                 type: 'POST',
-                url: '@Url.Action("Success", "Home")',
-                data: emailData,
+                url: '@Url.Action("SendEmail", "Home")',
+                data: $(this).serialize(),
                 success: function (data) {
                     if (data.Success) {
                         document.getElementById("To").value = "";
@@ -75,15 +71,16 @@
                     }
                 },
                 error: function (data) {
-                    alert(data.Message);
+                    alert("Nie udało się wysłać wiadomości. Sprawdz czy wszystkie wymagane pola sa wypełnione, lub czy nie wystepuje inny problem np. w konfiguracji email");
                 },
                 dataType: 'json'
             });
-        }
+            return false;
+        });
 
         function refreshRecipient() {
             $.ajax({
-                url: '@Url.Action("_ListRecipients")',
+                url: '@Url.Action("Recipients")',
                 type: 'GET',
                 success: function (result) {
                     $('#recipient').html(result);

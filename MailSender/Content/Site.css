@@ -19,3 +19,6 @@
 .border {
     border-radius: 15px;
 }
+.field-validation-error {
+    color: #ff3333;
+}
