@@ -171,6 +171,10 @@
     <Compile Include="Migrations\202306021427226_init.designer.cs">
       <DependentUpon>202306021427226_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202306031701525_init1.cs" />
+    <Compile Include="Migrations\202306031701525_init1.designer.cs">
+      <DependentUpon>202306031701525_init1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Domains\Email.cs" />
     <Compile Include="Models\Domains\EmailParams.cs" />
@@ -308,6 +312,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202306021427226_init.resx">
       <DependentUpon>202306021427226_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306031701525_init1.resx">
+      <DependentUpon>202306031701525_init1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -32,7 +32,7 @@
             </div>
             <div class="row">
                 @Html.LabelFor(m => m.SenderEmailPassword, new { @class = "col-md-6 col-form-label label-bold" })
-                @Html.TextBoxFor(m => m.SenderEmailPassword, new { @class = "form-control" })
+                @Html.PasswordFor(m => m.SenderEmailPassword, new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => m.SenderEmailPassword)
             </div>
             <div class="row">

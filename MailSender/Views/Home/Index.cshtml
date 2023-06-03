@@ -2,11 +2,7 @@
 @{
     ViewBag.Title = "Wiadomość";
 }
-<div class="row">
-    <div class="col-lg-12 mt-3 d-flex justify-content-between">
-        <button class="btn btn-primary btn-info" onclick='window.location.href="@Url.Action("HistoryEmails", "Home")"'>Wysłane e-maile</button>
-    </div>
-</div>
+
 <form id="EmailForm">
     <div class="row justify-content-center">
         <div class="col-lg-6 border border-opacity-75 p-3 mt-4">
@@ -37,10 +33,10 @@
             <div class="row">
                 <div class="col-lg-12 mt-3 d-flex justify-content-between">
                     <button class="btn btn-dark" type="submit">Wyślij</button>
+                    <button class="btn btn-primary btn-info" type="button" onclick='window.location.href="@Url.Action("HistoryEmails", "Home")"'>Wysłane e-maile</button>
                 </div>
             </div>
         </div>
-
         <div class="col-5 offset-lg-1 border border-opacity-25 p-3 mt-4" id="recipient">
             @Html.Partial("_ListRecipients", Model.Recipient)
         </div>

@@ -19,11 +19,13 @@ namespace MailSender.Models.Domains
         [Display(Name = "Nadawca:")]
         public string From { get; set; }
         [Required(ErrorMessage = "Pole odbiorca jest wymagane")]
-        [Display(Name = "Odbiorcy:")]        
+        [Display(Name = "Odbiorcy:")]
         public string To { get; set; }
         [Display(Name = "Temat:")]
+        [Required(ErrorMessage = "Pole temat jest wymagane")]
         public string Subject { get; set; }
         [Display(Name = "Treść e-mail:")]
+        [Required(ErrorMessage = "Pole treść jest wymagane")]
         public string Body { get; set; }
         public DateTime SentTime { get; set; }
         [Required]
